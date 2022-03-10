@@ -91,7 +91,8 @@ export default {
     kpiNgot() {
       return {
         qId: 'NnMKtj',
-        description: `Students who are earning the credits needed to advance to 10th grade`,
+        description: `Students who earned at least one credit
+          in each of four core subjects and at least five credits total. Eligible students were enrolled in 9th grade in the displayed year.`,
         title: '',
         subtitle: ' ',
         secondaryLabel: 'From  ' + this.$store.getters.sy_p,
@@ -108,7 +109,7 @@ export default {
     kpiGrad() {
       return {
         qId: 'sTeYS',
-        description: `Students who are graduating within four years of entering high school`,
+        description: `Students who graduated within four years of entering high school. Eligible students were enrolled in 12th grade in the displayed year.`,
         title: '',
         subtitle: ' ',
         secondaryLabel: 'From  ' + this.$store.getters.sy_p,
@@ -125,7 +126,7 @@ export default {
     kpiFFM() {
       return {
         qId: 'wakMk',
-        description: `Students who are entering college the first fall after graduating high school`,
+        description: `Students who enrolled in college the first fall after graduating high school. Eligible students were enrolled in 12th grade in the displayed year.`,
         title: '',
         subtitle: ' ',
         secondaryLabel: 'From  ' + this.$store.getters.sy_p,
@@ -142,7 +143,7 @@ export default {
     kpiPersistence() {
       return {
         qId: 'WACqTM',
-        description: `Students who went to college after graduation who are still enrolled the next year`,
+        description: `Students who enrolled in college after graduation and were still enrolled the next year. Eligible students were enrolled in 12th grade the year prior to the displayed year.`,
         title: '',
         subtitle: ' ',
         secondaryLabel: 'From  ' + this.$store.getters.sy_p,

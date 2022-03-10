@@ -13,9 +13,59 @@
         <Column side="left" width="1/3">
           <Square color="dark">
             <Heading size="large">
-              <span id="main-title"> College & Career </span>
+              <nuxt-link id="main-title" to="/" exact
+                >College & Career</nuxt-link
+              >
             </Heading>
-            <p class="text-xl">For the {{ $store.getters.sy_c }} school year</p>
+            <div class="text-base">
+              <!-- For the {{ $store.getters.sy_c }} school year -->
+              <ul class="w-full">
+                <li>
+                  <nuxt-link to="/ontrack" exact class="font-bold underline"
+                    >9th Grade on Track</nuxt-link
+                  >
+                  <p class="text-sm">
+                    9th graders enrolled in
+                    {{ $store.getters.sy_p2_all }},
+                    {{ $store.getters.sy_p_all }}, and
+                    {{ $store.getters.sy_c_all }}
+                  </p>
+                </li>
+                <li>
+                  <nuxt-link to="/grad" exact class="font-bold underline"
+                    >Graduation</nuxt-link
+                  >
+                  <p class="text-sm">
+                    12th graders enrolled in
+                    {{ $store.getters.sy_p2_all }},
+                    {{ $store.getters.sy_p_all }}, and
+                    {{ $store.getters.sy_c_all }}
+                  </p>
+                </li>
+                <li>
+                  <nuxt-link to="/ffm" exact class="font-bold underline"
+                    >College Matriculation</nuxt-link
+                  >
+                  <p class="text-sm">
+                    12th graders enrolled in
+                    {{ $store.getters.sy_p2_all }},
+                    {{ $store.getters.sy_p_all }}, and
+                    {{ $store.getters.sy_c_all }}
+                  </p>
+                </li>
+                <li>
+                  <nuxt-link to="/persistence" exact class="font-bold underline"
+                    >College Persistence</nuxt-link
+                  >
+                  <p class="text-sm">
+                    12th graders enrolled in
+                    {{ $store.getters.sy_p3_all }},
+                    {{ $store.getters.sy_p2_all }}, and
+                    {{ $store.getters.sy_p_all }}
+                  </p>
+                </li>
+              </ul>
+            </div>
             <button
               id="main-tour-button"
               class="blink text-blue-800 bg-white px-2 py-1 my-1 text-base font-bold uppercase hover:bg-gray-200 focus:outline-none"
@@ -29,7 +79,7 @@
             <QlikCollapsableFilterContainer
               id="main-filters"
               :field-values="filterFieldValues"
-              :blacklist-fields="['Current School Name']"
+              :excluded-fields="['Current School Name']"
               @change="handleSelections"
             />
             <QlikFilter
@@ -83,7 +133,7 @@ export default {
         {
           target: '#main-title',
           content:
-            'Welcome to the College & Career website. Here you can find data about high school students and graduates for both district and public charter schools in Philadelphia.',
+            'Welcome to the College & Career Data Website. Here you can find data about high school students and graduates for both district and public charter schools in Philadelphia.',
           params: { enableScrolling: true },
           offset: -400,
         },

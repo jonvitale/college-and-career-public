@@ -32,12 +32,60 @@
             website details.
           </li>
           <li>
-            <span class="font-semibold">School Sectors Included:</span> District
-            and Charter (not including virtual charters)
+            <span class="font-semibold">Data Suppression:</span> To help protect
+            the identity of students, at least 20 students are required to
+            display a metric. For example, if a selected school has 15 male
+            students and 25 female students, only a bar for female students will
+            display in the gender bar chart.
           </li>
           <li>
-            <span class="font-semibold">School Years Included:</span> SY 2012-13
-            to SY {{ $store.getters.sy_c }}
+            <span class="font-semibold">School Sectors Included:</span>
+            District, Alternative, and Charters (not including virtual
+            charters). See the
+            <a
+              href="https://www.philasd.org/opportunitynetwork/"
+              target="_blank"
+            >
+              Opportunity Network
+            </a>
+            website for more information about Alternative schools (note that
+            some Alternative schools are within the "Innovation" network) and
+            the
+            <a href="https://www.philasd.org/charterschools/" target="_blank">
+              Charter Schools Office
+            </a>
+            for more information about Charter Schools.
+          </li>
+          <li>
+            <span class="font-semibold">School Years Included:</span> SY
+            {{ $store.getters.sy_p2 }} to SY {{ $store.getters.sy_c }}
+          </li>
+        </ul>
+        <div class="section-break" />
+      </div>
+      <div ref="v-terms" name="Terms" color="tint">
+        <h1>Key Terms</h1>
+        <ul>
+          <li>
+            <span class="font-semibold">English Learners (EL):</span>
+            Students identified as English Learners, as determined by the ACCESS
+            exam.
+          </li>
+          <li>
+            <span class="font-semibold">Special Education (IEP):</span> Students
+            with an Individualized Education Program (IEP) for a diagnosed
+            disability (not including "giftedness").
+          </li>
+          <li>
+            <span class="font-semibold">Economically Disadvantaged:</span>
+            The Community Eligibility Provision (CEP) Economically Disadvantaged
+            Rate is the percentage of identified Studentss multiplied by a
+            USDA-defined factor of 1.6, and capped at 100%. Identified Students
+            are those who are eligible for free meals and are not subject to
+            verification, including but not limited to students directly
+            certified through participation in the Supplemental Nutrition
+            Assistance Program (SNAP) and Temporary Assistance for Needy
+            Families (TANF).
           </li>
         </ul>
         <div class="section-break" />
@@ -176,7 +224,7 @@ li {
 }
 
 .section-break {
-  padding-bottom: 3rem;
+  padding-bottom: 2rem;
 }
 
 .research {

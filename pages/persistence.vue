@@ -21,13 +21,16 @@
           <p class="text-lg font-semibold">District Rate: {{ districtAvg }}</p>
         </div>
         <p>
-          Percent of first-fall matriculants who were still enrolled in a
-          post-secondary institution in the second fall after graduating high
-          school. Students are counted in the year after they graduate high
-          school, regardless of whether or not they graduated on time. For
-          example, students who graduated in {{ $store.getters.sy_p_all }} are
-          shown in {{ $store.getters.sy_c_all }}. Students are broken out into
-          those
+          Percent of first-fall matriculants (see
+          <nuxt-link to="/ffm" class="text-blue-400 underline"
+            >Matriculation</nuxt-link
+          >
+          page) who were still enrolled in a post-secondary institution in the
+          second fall after graduating high school. Students are counted in the
+          year after they graduate high school, regardless of whether or not
+          they graduated on time. For example, students who graduated in
+          {{ $store.getters.sy_p_all }} are shown in
+          {{ $store.getters.sy_c_all }}. Students are broken out into those
           <span class="font-semibold persistence-four"
             >attending four-year institutions</span
           >, those
@@ -36,7 +39,8 @@
           >, and those who were
           <span class="font-semibold persistence-no"
             >no longer attending a post-secondary institution</span
-          >.
+          >. Note: College Persistence data is not available for Alternative
+          schools in {{ $store.getters.sy_c_all }}.
         </p>
       </div>
     </Square>
@@ -49,7 +53,7 @@
     >
       <QlikKPI
         ref="kpiOverall"
-        class="max-w-sm"
+        class="max-w-lg"
         :q-id="kpiOverall.qId"
         :title="kpiOverall.title"
         :subtitle="kpiOverall.subtitle"
@@ -63,7 +67,7 @@
           :options="demoTypeMap"
           :selected-value="demoType"
           label="Demographic category"
-          @buttonClicked="handleDemoSelection($event.value, $event.label)"
+          @click="handleDemoSelection($event.value, $event.label)"
         />
       </div>
       <QdtComponent
@@ -88,7 +92,7 @@
         <ButtonGroup
           :options="numSelectedMap"
           :selected-value="numSelected"
-          @buttonClicked="handleNumSelected($event.value, $event.label)"
+          @click="handleNumSelected($event.value, $event.label)"
         />
       </div>
 
@@ -138,9 +142,9 @@ export default {
       return {
         Ethnicity: 'Ethnicity',
         Gender: 'Gender',
-        IEP: 'IEP',
-        EL: 'EL',
-        EconDisadvantaged: 'Economically Disadvantaged',
+        SPED: 'IEP',
+        ELStatus: 'EL',
+        EconDisadvantagedStatus: 'Economically Disadvantaged',
       }
     },
     numSelectedMap() {
@@ -154,7 +158,7 @@ export default {
     kpiOverall() {
       return {
         qId: 'WACqTM',
-        description: `Students who went to college after graduation who are still enrolled the next year`,
+        description: `Students who enrolled in college after graduation and were still enrolled the next year. Eligible students were enrolled in 12th grade the year prior to the displayed year.`,
         title: '',
         subtitle: ' ',
         secondaryLabel: `From ${this.$store.getters.sy_p}`,
@@ -170,14 +174,15 @@ export default {
     },
     sankey() {
       return {
-        id: 'FpjmtMR',
+        id: 'eDKEjG',
         type: 'qlik-sankey-chart-ext',
         height: '400px',
+        noSelections: true,
       }
     },
     map() {
       return {
-        id: 'nTmnjEb',
+        id: 'jpZveE',
         type: 'map',
         height: '600px',
       }
@@ -190,7 +195,7 @@ export default {
       }
     },
   },
-  async mounted() {
+  async created() {
     const districtAvg = await this.$qlik.evaluateVariableValueByName(
       'v_avg_persistence_district_cy'
     )

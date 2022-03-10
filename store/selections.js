@@ -17,6 +17,11 @@ export const getters = {
   selectedSchool(state) {
     return state.school
   },
+  totalSelections(state) {
+    return state.fields_with_selections.reduce((acc, field) => {
+      return acc + state.current_selections[field].length
+    }, 0)
+  },
 }
 
 export const mutations = {

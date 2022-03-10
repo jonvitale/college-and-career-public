@@ -31,7 +31,8 @@
           >, and those who were
           <span class="font-semibold offtrack"
             >off track because they did not earn all necessary credits</span
-          >.
+          >. Note: College Persistence data is not available for Charter or
+          Alternative schools in {{ $store.getters.sy_c_all }}.
         </p>
 
         <p></p>
@@ -46,7 +47,7 @@
     >
       <QlikKPI
         ref="kpiOverall"
-        class="max-w-sm"
+        class="max-w-lg"
         :q-id="kpiOverall.qId"
         :title="kpiOverall.title"
         :subtitle="kpiOverall.subtitle"
@@ -60,7 +61,7 @@
           :options="demoTypeMap"
           :selected-value="demoType"
           label="Demographic category"
-          @buttonClicked="handleDemoSelection($event.value, $event.label)"
+          @click="handleDemoSelection($event.value, $event.label)"
         />
       </div>
       <QdtComponent
@@ -85,7 +86,7 @@
         <ButtonGroup
           :options="numSelectedMap"
           :selected-value="numSelected"
-          @buttonClicked="handleNumSelected($event.value, $event.label)"
+          @click="handleNumSelected($event.value, $event.label)"
         />
       </div>
       <QdtComponent class="w-full" :load="loadMap" type="QdtViz" :props="map" />
@@ -134,9 +135,9 @@ export default {
       return {
         Ethnicity: 'Ethnicity',
         Gender: 'Gender',
-        IEP: 'IEP',
-        EL: 'EL',
-        EconDisadvantaged: 'Economically Disadvantaged',
+        SPED: 'IEP',
+        ELStatus: 'EL',
+        EconDisadvantagedStatus: 'Economically Disadvantaged',
       }
     },
     numSelectedMap() {
@@ -150,7 +151,8 @@ export default {
     kpiOverall() {
       return {
         qId: 'NnMKtj',
-        description: `Students who are earning the credits needed to advance to 10th grade`,
+        description: `Students who earned at least one credit
+          in each of four core subjects and at least five credits total. Eligible students were enrolled in 9th grade in the displayed year.`,
         title: '',
         subtitle: ' ',
         secondaryLabel: `From ${this.$store.getters.sy_p}`,
@@ -169,11 +171,12 @@ export default {
         id: 'FBvXuh',
         type: 'qlik-sankey-chart-ext',
         height: '400px',
+        noSelections: true,
       }
     },
     map() {
       return {
-        id: 'JjQYPnb',
+        id: 'pJgrgJ',
         type: 'map',
         height: '600px',
       }
@@ -186,7 +189,7 @@ export default {
       }
     },
   },
-  async mounted() {
+  async created() {
     const districtAvg = await this.$qlik.evaluateVariableValueByName(
       'v_avg_9got_district_cy'
     )

@@ -47,7 +47,7 @@
     >
       <QlikKPI
         ref="kpiOverall"
-        class="max-w-sm"
+        class="max-w-lg"
         :q-id="kpiOverall.qId"
         :title="kpiOverall.title"
         :subtitle="kpiOverall.subtitle"
@@ -61,7 +61,7 @@
           :options="demoTypeMap"
           :selected-value="demoType"
           label="Demographic category"
-          @buttonClicked="handleDemoSelection($event.value, $event.label)"
+          @click="handleDemoSelection($event.value, $event.label)"
         />
       </div>
       <QdtComponent
@@ -86,7 +86,7 @@
         <ButtonGroup
           :options="numSelectedMap"
           :selected-value="numSelected"
-          @buttonClicked="handleNumSelected($event.value, $event.label)"
+          @click="handleNumSelected($event.value, $event.label)"
         />
       </div>
       <QdtComponent class="w-full" :load="loadMap" type="QdtViz" :props="map" />
@@ -135,9 +135,9 @@ export default {
       return {
         Ethnicity: 'Ethnicity',
         Gender: 'Gender',
-        IEP: 'IEP',
-        EL: 'EL',
-        EconDisadvantaged: 'Economically Disadvantaged',
+        SPED: 'IEP',
+        ELStatus: 'EL',
+        EconDisadvantagedStatus: 'Economically Disadvantaged',
       }
     },
     numSelectedMap() {
@@ -151,7 +151,7 @@ export default {
     kpiOverall() {
       return {
         qId: 'sTeYS',
-        description: `Students who are graduating within four years of entering high school`,
+        description: `Students who graduated within four years of entering high school. Eligible students were enrolled in 12th grade in the displayed year.`,
         title: '',
         subtitle: ' ',
         secondaryLabel: `From ${this.$store.getters.sy_p}`,
@@ -167,14 +167,15 @@ export default {
     },
     sankey() {
       return {
-        id: 'SuCjmAW',
+        id: 'ECDfxzP',
         type: 'qlik-sankey-chart-ext',
         height: '400px',
+        noSelections: true,
       }
     },
     map() {
       return {
-        id: 'XepP',
+        id: 'SmdW',
         type: 'map',
         height: '600px',
       }
@@ -187,7 +188,7 @@ export default {
       }
     },
   },
-  async mounted() {
+  async created() {
     const districtAvg = await this.$qlik.evaluateVariableValueByName(
       'v_avg_graduation_district_cy'
     )
